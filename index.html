@@ -1,0 +1,326 @@
+<html>
+ <head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <style>
+	*{
+		transition-duration:0.5s;
+	}
+	body{
+		position:absolute;
+		width:100%;
+		height:100%;
+		margin:0;
+		font-family:sans-serif;
+		overflow:hidden;
+		color:#666;
+	}
+	
+	h2,h3{
+		color:#669;
+		font-variant:small-caps;
+	}
+	
+	.dark{
+		background:#fff;
+		box-shadow:0 0 10px #eee;
+	}
+	.large, .large a{
+		font-size:24px;
+	}
+	.center{
+		text-align:center;
+	}
+	
+	header{
+		position:absolute;
+		width:100%;
+		height:48px;
+		background:#fff;
+		box-shadow:0 0 10px #eee;
+	}
+	menu{
+		text-align:right;
+	}
+	menu a{
+		text-decoration:none;
+		padding:16px;
+		color:#6cf;
+	}
+	menu a:hover{
+		transform:scale(1.3);
+	}
+	main{
+		position:absolute;
+		top:48px;
+		width:100%;
+		bottom:0;
+		overflow:auto;
+		visibility:hidden;
+		opacity:0;
+	}
+	main:target{
+		visibility:visible;
+		opacity:1;
+	}
+	#home{
+		visibility:visible;
+		opacity:1;
+	}
+	main:target ~ #home{
+		visibility:hidden;
+		opacity:0;
+	}
+	main a{
+		text-decoration:none;
+		color:#000;
+		text-shadow:0 0 4px #fff;
+		font-variant:small-caps;
+	}
+	#bar{
+		position:absolute;
+		top:44px;
+		height:4px;
+		width:75px;
+		right:169px;
+		background:#6cf;
+	}
+	#about:target ~ #bar{
+		width:73px;
+		right:91px;
+	}
+	#contact:target ~ #bar{
+		width:86px;
+		right:0;
+	}
+	
+	section{
+		padding:16px;
+	}
+	
+	article{
+		padding:16px;
+		max-width:800px;
+		margin:auto;
+		border-radius:48px;
+		background:rgba(0,150,255,0.2);
+	}
+	
+	table{
+		width:100%;
+	}
+	
+	.background{
+		position:absolute;
+		width:100%;
+		height:100%;
+		overflow:hidden;
+		z-index:-1;
+	}
+	.background div{
+		position:absolute;
+		border-radius:50%;
+		background:#6cf;
+	}
+	
+	#space{
+		background:#001;
+	}
+	#space header{
+		background:#000;
+		box-shadow:0 0 100px #306;
+	}
+	#space menu a{
+		color:#ccc;
+	}
+	#space article{
+		border-radius:16px;
+		box-shadow:2px -6px 6px rgba(100,100,100,0.5);
+		background:none; rgba(100,100,100,0.1);
+	}
+	#space .background div{
+		width:4px !important;
+		height:4px !important;
+		background:#ffc !important;
+		box-shadow:0 0 8px #ffc;
+		margin:100px;
+	}
+	#space .dark{
+		background:#000;
+		box-shadow:0 0 10px #306;
+	}
+	#space #bar{
+		background:#ccc;
+	}
+	
+	#bubbles menu a{
+		color:#f9f;
+	}
+	#bubbles article{
+		border-radius:50%;
+	}
+	#bubbles .background div{
+		width:96px !important;
+		height:96px !important;
+		background:none !important;
+		box-shadow:0 0 8px #f9f inset;
+		margin:50px;
+	}
+	#bubbles #bar{
+		background:#f9f;
+	}
+	
+	#wood main{
+		background:#fc9;
+		background:linear-gradient(#fc9,#eb8,#da7,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#da7,#c96,#eb8,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#eb8,#da7,#da7,#eb8,#da7,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#da7,#c96,#eb8,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#da7,#c96,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#eb8,#fc9,#eb8,#da7,#da7,#c96,#c96,#eb8,#fc9,#fc9,#da7,#c96,#eb8,#da7,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#da7,#c96,#eb8,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#eb8,#da7,#da7,#eb8,#da7,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#da7,#c96,#eb8,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#da7,#c96,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#eb8,#fc9,#eb8,#da7,#da7,#c96,#c96,#eb8,#fc9,#fc9,#da7,#c96,#eb8,#fc9,#eb8,#da7,#da7,#c96,#c96,#eb8,#fc9,#eb8,#da7,#da7,#c96,#eb8,#fc9,#eb8,#da7,#da7,#c96,#c96,#eb8,#fc9,#eb8,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#fc9,#eb8,#da7,#da7);!important
+	}
+	#wood header{
+		background:#963;
+		background:linear-gradient(#eb8,#fc9,#eb8,#da7,#da7,#c96,#c96,#eb8,#fc9,#eb8,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#fc9,#eb8,#da7,#da7);
+		box-shadow:0 0 8px #000;
+	}
+	#wood menu a{
+		color:#630;
+	}
+	#wood article{
+		border-radius:0;
+		box-shadow:0 0 8px #000 inset;
+		background:white;
+	}
+	#wood .dark{
+		background:#fc9;
+		background:linear-gradient(#fc9,#eb8,#da7,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#c96,#eb8,#da7,#da7,#da7,#da7,#c96,#da7,#c96,#eb8,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#fc9,#da7,#c96,#eb8,#fc9,#eb8,#da7,#da7,#c96,#c96,#eb8,#fc9,#eb8,#da7,#da7,#c96,#eb8,#da7,#da7,#c96,#eb8,#fc9,#eb8,#da7,#da7);
+		box-shadow:0 0 10px #000;
+	}
+	#wood h2,#wood h3{
+		color:#630;
+	}
+	#wood #bar{
+		background:#630;
+	}
+  </style>
+ </head>
+ <body>
+  <main id="contact">
+   <section>
+    <article>
+	 <h2>Get in touch <h3>Discover a new world</h3></h2>
+	 <p>Contact me today to discover the beneficials of a well-designed website. Feel free to ask any questions, so we can start soon without any doubts. Tell me about your dream website so we can make your wishes become true.</p>
+	</article>
+   </section>
+   <section class="dark">
+	<h2 class="center">Start today - benefit tomorrow</h2>
+   </section>
+   <section>
+    <article>
+	 <h3>Name: Tim Funk</h3>
+	 <h3>Email: funktim20@gmail.com</h3>
+	 <a href="mailto:funktim20@gmail.com">
+	  <section class="dark center">
+	   <h2>Email Tim Funk</h2>
+	  </section>
+	 </a>
+	</article>
+   </section>
+   <section>
+	<div style="position:absolute;margin:16px 0;font-size:96;letter-spacing:-8px;right:64px;">Design</div>
+    <div style="position:absolute;margin:128px 0;font-size:48;letter-spacing:2px;right:64px;">is Key</div>
+   </section>
+  </main>
+  <main id="about">
+   <section>
+    <article>
+     <p>Every company, that wants to grow and be successful, needs a detailed website with an awesome design. So why not get started? I can provide you with a light-weight, fast, stunning, and smooth website with the perfect address for your business.</p>
+    </article>
+    <article>
+ 	 <h3>Speed</h3>
+ 	 <p>... is what I have focused on. I don't use third-party scripts and style-sheets which slow down rendering enormously. With a very light-weight design, your website will load in a few seconds, even on the slowest network.</p>
+     </article>
+    <article>
+	 <h3>Design</h3>
+	 <p>...is a big part of your online customer service. To apply a stunning look to your website and yet make it simple to use - not an easy task. But we'll manage that, with incredible smoothness, guaranteed.</p>
+    </article>
+    <article>
+	 <h3>Website Updates</h3>
+	 <p>...will happen frequently, just as you require. Not a week delay, I promise!</p>
+    </article>
+    <article>
+	 <h3>Compatibility</h3>
+	 <p>...is the key for rendering with new technology. Just compare this site on your phone with your PC.</p>
+    </article>
+    <article>
+	 <h3>Price</h3>
+	 <p>No, I won't hide the price on the last page. Get started today with a full package at $85 a month.</p>
+    </article>
+    <article>
+	 <p>I'm just starting out. Help me setting up my business by becoming one of my first customers!</p>
+    </article>
+   </section>
+  </main>
+  <main id="home">
+   <section>
+    <article>
+     <p>Every company, that wants to grow and be successful, needs a detailed website with an awesome design. So why not get started? I can provide you with a light-weight, fast, stunning, and smooth website with the perfect address for your business.</p>
+	 <a href="#about">Learn more</a>
+    </article>
+   </section>
+   <section>
+    <article>
+	 <h2>Awesome Websites</h2>
+	 <p>I'm Tim Funk, a website designer, here to help your business grow.</p>
+	 <a href="#contact">Get in touch</a>
+    </article>
+   </section>
+   <section class="dark large" style="overflow:auto;margin:32px 0;cursor:pointer">
+    <h3>Discover some interactive designs:</h3>
+	<noscript><p style="color:red">Please enable Javascript for this interaction</p></noscript>
+	<table class="center">
+	 <td>
+	  <article onclick="xstyle('space')">
+	   <span style="border-radius:50%;box-shadow:4px 2px 2px #ff0;">Space</span>
+	  </article>
+	 </td>
+	 <td>
+	  <article onclick="xstyle('bubbles')">
+	   <span style="border-radius:50%;box-shadow:0 0 8px #f9f inset;">Bubbles</span>
+	  </article>
+	 </td>
+	 <td>
+	  <article onclick="xstyle('wood')">
+	   <span style="box-shadow:0 0 8px #000;background:#fc9;background:linear-gradient(#fc9,#c96)">Wood</span>
+	  </article>
+	 </td>
+	 <td>
+	  <article onclick="xstyle(0)">
+	   <span style="border-radius:16px;background:#6cf">First</span>
+	  </article>
+	 </td>
+	</table>
+   </section>
+  </main>
+  <header>
+   <div style="position:absolute;margin:4px;font-size:24;letter-spacing:-2px">Design</div>
+   <div style="position:absolute;margin:32px;font-size:12;letter-spacing:0.5px">is Key</div>
+   <menu>
+	<a href="#">Home</a>
+	<a href="#about">About</a>
+	<a href="#contact">Contact</a>
+   </menu>
+  </header>
+  <div id="bar"></div>
+  <div class="background">
+   <div style="top:46%;left:34%;width:361px;height:361px;"></div>
+   <div style="top:83%;left:16%;width:246px;height:246px;"></div>
+   <div style="top:26%;left:60%;width:383px;height:383px;"></div>
+   <div style="top:26%;left:45%;width:367px;height:367px;"></div>
+   <div style="top:2%;left:-17%;width:243px;height:243px;"></div>
+   <div style="top:36%;left:4%;width:143px;height:143px;"></div>
+   <div style="top:-4%;left:54%;width:164px;height:164px;"></div>
+   <div style="top:69%;left:87%;width:136px;height:136px;"></div>
+  </div>
+ </body>
+ <script>
+	function xstyle(a){
+		document.body.id=a;
+	}
+ </script>
+</html>
